@@ -1,5 +1,7 @@
 package pl.sda.javapol4.java_demo;
 
+import java.util.stream.Stream;
+
 class MyRunnable implements Runnable {
 
     public void run() {
@@ -72,5 +74,20 @@ public class LambdaDemo {
         StringToInt best = arg -> arg.length();
         System.out.println("using best: " + best.nameLength("mariusz"));
         System.out.println("using best: " + best.nameAndSurnameLength("mariusz", "p."));
+
+        Stream<Object> objects = Stream.of("mariusz", "marek", "adrianna", "zenon", "rysiek", "halina", 1, 2);
+        Stream<String> names = Stream.of("mariusz", "marek", "adrianna", "zenon", "rysiek", "halina");
+
+        // names
+        // 1). filter (names.len > 6)
+        // 2). sout - names lens
+        names.filter(string -> string.length() > 6)
+            .map(s -> s.length())
+            .forEach(integer -> System.out.println("from Stream<String> name len: " + integer));
+
+        objects.filter(o -> o instanceof String)
+            .map(o -> (String) o)
+            .map(s -> s.length())
+            .forEach(integer -> System.out.println("name len: " + integer));
     }
 }
